@@ -22,7 +22,12 @@ def crearTarea():
   listaTareas = [detallesTarea] 
 
   # insertando filas
-  cursor.executemany("INSERT INTO tareas VALUES (?,?,?)", listaTareas)
+  try:
+    cursor.executemany("INSERT INTO tareas VALUES (?,?,?)", listaTareas)
+  except Exception as error:
+    print(error)  
+  else:
+    print("Tarea creada con exito")
 
   # consultando datos
   cursor.execute("Select * FROM tareas")
@@ -81,3 +86,5 @@ elif(accion == "eliminar"):
   eliminarTarea()
 elif(accion == "ver"):
   verTareas()  
+else:
+  print("Ingresa una opción valida (agregar/modificar/eliminar/ver")  
